@@ -1,102 +1,185 @@
 import React, { Component } from 'react';
+import Map from './components/Map';
+import Toolbar from './components/Toolbar';
+import ViewDrawer from './components/ListView/ViewDrawer'
+import SquareAPI from './API/'
 import './App.css';
-import axios from 'axios'
-import ListDrawer from './components/ListDrawer';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      venues: [],
+      filteredVenues: [],
+      markers: [],
+      filteredMarkers: [],
+      center: [],
+      zoom: [16],
+      query: "",
+      viewDrawerOpen: false
+    };
+  }
+  closeOpenMarkers = () => {
+    const markers = this.state.markers.map(marker => {
+      marker.isOpen = false;
+      marker.clickedOnMarker = false;
+      marker.animation = "null";
+      return marker;
+    });
 
-
-  state = {
-      venues: []
-    }
-
-    componentDidMount() {
-      this.getVenues()
-    }
-
-    renderMap = () => {
-      loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAwzRLehoMPKA4cyls3k_wlE6LRHrjEbXo&callback=initMap")
-      window.initMap = this.initMap
-    }
-
-    getVenues = () => {
-      const endPoint = "https://api.foursquare.com/v2/venues/explore?"
-      const parameters = {
-        client_id: "D11D2WSPNJGWC4TSH014ICIPRKJYXLBIBVLGOMAULAEFK3TD",
-        client_secret: "JHGHSRQJNT2E1QSYTOTO4VTLDBSMV1LEURJI2UEEMM3D40BH",
-        query: "boba",
-        near: "San Francisco",
-        v: "20182507",
-        radius: "1000"
-      }
-
-      axios.get(endPoint + new URLSearchParams(parameters))
-        .then(response => {
-          this.setState({
-            venues: response.data.response.groups[0].items
-          }, this.renderMap())
-        })
-        .catch(error => {
-          console.log("ERROR!! " + error)
-        })
-
-    }
-
-    initMap = () => {
-
-      // Create A Map
-      var map = new window.google.maps.Map(document.getElementById('map'), {
-        center: {lat: 37.781916, lng: -122.407953},
-            zoom: 15
-      })
-
-      // Create An InfoWindow
-      var infowindow = new window.google.maps.InfoWindow(ListDrawer)
-
-      // Display Dynamic Markers
-      this.state.venues.map(myVenue => {
-
-        var contentString = `${myVenue.venue.name}`
-
-        // Create A Marker
-        var marker = new window.google.maps.Marker({
-          position: {lat: myVenue.venue.location.lat , lng: myVenue.venue.location.lng},
-          map: map,
-          title: myVenue.venue.name
-        })
-
-        // Click on A Marker!
-        marker.addListener('click', function() {
-
-          // Change the content
-          infowindow.setContent(contentString)
-
-          // Open An InfoWindow
-          infowindow.open(map, marker)
-        })
-        return console.log("Hi reviewer!! Please go easy =(.")
-      })
-
-
-
-    }
-
-    render() {
-      return (
-        <main>
-          <div id="map"></div>
-        </main>
-      )
-    }
+    this.setState({
+      markers: Object.assign(markers, markers)
+    })
   }
 
-function loadScript(url) {
-  var index  = window.document.getElementsByTagName("script")[0]
-  var script = window.document.createElement("script")
-  script.src = url
-  script.async = true
-  script.defer = true
-  index.parentNode.insertBefore(script, index)
+  openInfoWindowOnClick = (marker) => {
+    const venueClicked = this.state.venues.find(venue => venue.id === marker.id)
+    SquareAPI.getVenueDetails(marker.id).then(results => {
+        const concatData = Object.assign(venueClicked, results.response.venue);
+        this.setState({
+          venues: Object.assign(this.state.venues, concatData)
+        })
+      })
+      .catch(error => {this.setState(error)
+        console.log(this.state.error)
+      })
+  }
+
+  handleMarkerClick = (marker) => {
+    this.closeOpenMarkers()
+    marker.isOpen = true;
+    marker.clickedOnMarker = true;
+    this.setState({
+      markers: Object.assign(this.state.markers, marker)
+    });
+    this.openInfoWindowOnClick(marker);
+  };
+
+  venueClickHandler = venue => {
+    const marker = this.state.markers.find(marker => marker.id === venue.id);
+    this.handleMarkerClick(marker);
+  };
+
+  filterOnQuery = event => {
+    const query = event.target.value;
+    this.setState({query})
+    if (query === "") {
+      const filteredVenues = this.state.venues;
+      this.setState({
+        filteredVenues
+      });
+      const filteredMarkers = this.state.markers;
+      this.setState({
+        filteredMarkers
+      });
+    }
+    else {
+      const filteredVenues = this.venueFilter(query);
+      this.setState({
+        filteredVenues
+      });
+
+      const filteredMarkers = this.markerFilter(query);
+      this.setState({
+        filteredMarkers
+      })
+    }
+  }
+  venueFilter = (query) => {
+    const filteredVenues = this.state.venues.filter(venue =>
+      venue.name.toUpperCase().includes(query.toUpperCase())
+    );
+    return filteredVenues;
+  };
+  markerFilter = (query) => {
+    const filteredMarkers = this.state.venues.map(venue => {
+      const match = venue.name.toUpperCase().includes(query.toUpperCase());
+      const marker = this.state.markers.find(marker => marker.id === venue.id);
+      if (match) {
+        marker.isVisible = true;
+      } else {
+        marker.isVisible = false;
+      }
+      return marker;
+    });
+    return filteredMarkers
+  }
+
+
+  componentDidMount() {
+    SquareAPI.search({
+        near: "San Francisco",
+        query: "library",
+        radius: 1000,
+        limit: 15
+      }).then(results => {
+        const {venues} = results.response;
+        const markers = venues.map(venue => {
+          return {
+            lat: venue.location.lat,
+            lng: venue.location.lng,
+            id: venue.id,
+            isOpen: false,
+            isVisible: true,
+            clickedOnMarker: false,
+          };
+        });
+        this.setState({venues});
+        this.setState({markers});
+
+        const filteredVenues = venues
+        const filteredMarkers = markers
+        this.setState({
+          filteredVenues
+        })
+        this.setState({
+          filteredMarkers
+        })
+
+      })
+      .catch(error => {
+        this.setState({
+          error
+        });
+      })
+  }
+
+  drawerToggleClickHandler = () => {
+    this.setState((prevState) => {
+      return {
+        viewDrawerOpen: !prevState.viewDrawerOpen
+      };
+    });
+  };
+
+  render() {
+    let viewDrawer;
+    if (this.state.viewDrawerOpen) {
+      viewDrawer =
+      <ViewDrawer
+      { ...this.state}
+      venueClickHandler = {this.venueClickHandler}
+      filterOnQuery = {this.filterOnQuery}
+      />;
+
+    }
+
+    return (
+      <div style = {{height: '100%'}}>
+          <Toolbar drawerClickHandler = {this.drawerToggleClickHandler}/>
+          {viewDrawer}
+          <main style = {{marginTop: '65px'}}>
+          </main>
+          <Map
+            { ...this.state}
+            handleMarkerClick = {this.handleMarkerClick}
+            closeOpenMarkers = {this.closeOpenMarkers}
+            filterOnQuery = {this.filterOnQuery}
+            click = {this.mapClickHandler}
+          />
+      </div>
+    );
+  }
 }
 
 export default App;
