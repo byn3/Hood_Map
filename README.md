@@ -14,8 +14,14 @@ Enjoy!
 ### Thanks to all the guides and walkthroughs!
 Thanks to the live help, student classrooms, forums, and to the project coaches!!! Doug Brown, Forrest, Yahya Elharony were big MVPs.
 
+Also thanks to all these resources. https://www.diigo.com/outliner/fkkuvb/Udacity-Neighborhood-Map-Project-(project-%237)?key=25wgqnwals
 
+#### How to run the Production Mode
 
+* npm run build  
+* Go to the build directory and start a localhost with python  
+* python -m SimpleHTTPServer 8000  
+* Go to http://localhost:800  
 
 
 
