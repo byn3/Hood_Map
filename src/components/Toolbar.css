@@ -1,0 +1,25 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: pink;
+  height: 55px;
+  z-index: 10000;
+}
+
+.toolbar_navigation {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.toolbar_text {
+  color: brown;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: calc(1em + 2vh);
+  margin-left: 0.5rem;
+}

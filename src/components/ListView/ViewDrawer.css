@@ -1,0 +1,54 @@
+.view-drawer {
+  height: 100%;
+  background: lightgray;
+  box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  padding: 6px;
+  color: white;
+  top: 3.5rem;
+  left: 0;
+  width: 29%;
+  max-width: 400px;
+  z-index: 200;
+}
+
+.venue-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+  margin-top: 32px;
+  margin-left: 0;
+}
+
+.venue-name, #filter {
+  padding: 4px;
+  margin-left: 0;
+  margin-bottom: 4px;
+  color: black;
+  font-size: calc(1em + 1vh);
+  font-weight: bold;
+  background: pink;
+  border: solid 2px black;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#filter{
+  background: white;
+  width: 95%;
+}
+
+.view-drawer li {
+  margin-top: 1rem;
+}
+
+
+
+.view-drawer button:hover,
+.view-drawer button:active {
+  color: purple;
+  font-style: italic;
+  font-weight: bold;
+}
