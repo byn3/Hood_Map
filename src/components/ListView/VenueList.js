@@ -2,11 +2,9 @@
 import React, {Component} from "react";
 
 class VenueList extends Component {
-
   componentWillReceiveProps = (props) => {
     this.props = props
   }
-
   render() {
     return (
       <div>

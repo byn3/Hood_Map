@@ -35,7 +35,7 @@
   align-items: center;
 }
 
-#filter{
+#filter {
   background: white;
   width: 95%;
 }
@@ -43,8 +43,6 @@
 .view-drawer li {
   margin-top: 1rem;
 }
-
-
 
 .view-drawer button:hover,
 .view-drawer button:active {

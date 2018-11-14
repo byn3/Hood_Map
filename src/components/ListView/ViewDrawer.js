@@ -1,4 +1,4 @@
-/* the hamburger menu. handles that.*/
+/* the hamburger menu. handles the venues. can filter by name */
 import React, {Component} from 'react';
 import './ViewDrawer.css';
 import VenueList from './VenueList';
@@ -23,7 +23,7 @@ class ViewDrawer extends Component {
               />
           </ol>
           <em>Data Query From <a href=
-          "https://developer.foursquare.com/docs/api/venues/search">FourSquare</a>
+          "https://developer.foursquare.com/docs/api/venues/search" target="_blank" rel="noopener noreferrer">FourSquare</a>
           </em >
       </nav>
       </aside>

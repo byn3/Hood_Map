@@ -27,7 +27,6 @@ const Helper = {
       Accept: "application/json"
     };
   },
-
   /* Fetches the endPoint with the D. heheh. data */
   simpleFetch: (endPoint, method, urlArguments) => {
     let requestTheD = {
@@ -41,7 +40,6 @@ const Helper = {
       .catch(e => alert.e('THIS DUN MESSED UP:', e));
       }
 };
-
 /* uses the Square API to get venue details*/
 const SquareAPI = {
   search: urlArguments => {
