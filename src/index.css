@@ -14,11 +14,6 @@ code {
     monospace;
 }
 
-p {
-  text-align: center;
-  font-size: calc(1em + 8vw);
-  font-style: italic;
-  font-weight: bold;
-  color: #FFEBCD;
-  margin: 0px;
+html {
+  height: 100%;
 }
