@@ -105,10 +105,10 @@ class App extends Component {
   componentDidMount() {
 
     window.gm_authFailure = () => {
-      var x = false;
+      /* var x = false; */
       alert("There was an error with the Google Maps API")
       console.log("Hello Beautiful Reviewer");
-      x = true;
+      /* x = true; */
     }
 
 
