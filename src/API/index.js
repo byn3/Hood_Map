@@ -6,8 +6,8 @@ const Helper = {
   /* Authenticator */
   auth: () => {
     const keys = {
-      client_id: "D11D2WSPNJGWC4TSH014ICIPRKJYXLBIBVLGOMAULAEFK3TD",
-      client_secret: "JHGHSRQJNT2E1QSYTOTO4VTLDBSMV1LEURJI2UEEMM3D40BH",
+      client_id: "REMOVED MY KEYS",
+      client_secret: "JREMOVED MY KEYS",
       v: "20180323"
     };
     return Object.keys(keys).map(key =>
