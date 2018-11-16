@@ -44,17 +44,20 @@ class Map extends Component {
 
     return (
       <div className="map">
-        <MyMapComponent
-          role="application"
-          aria-label="map"
-          {...this.props}
-          isMarkerShown
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyAwzRLehoMPKA4cyls3k_wlE6LRHrjEbXo"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+
+            <MyMapComponent
+              role="application"
+              aria-label="map"
+              {...this.props}
+              isMarkerShown
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=IzaSyAwzRLehoMPKA4cyls3k_wlE6LRHrjEbXo"
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `100%` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+            />
+
       </div>
+
     );
   }
 }

@@ -6,19 +6,15 @@ import SquareAPI from './API/'
 import './App.css';
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
-      venues: [],
-      filteredVenues: [],
-      markers: [],
-      filteredMarkers: [],
-      center: [],
-      zoom: [16],
-      query: "",
-      viewDrawerOpen: false
+      venues: [], filteredVenues: [], markers: [], filteredMarkers: [],
+      center: [], zoom: [16], query: "", viewDrawerOpen: false
     };
   }
+
   closeOpenMarkers = () => {
     const markers = this.state.markers.map(marker => {
       marker.isOpen = false;
@@ -107,6 +103,15 @@ class App extends Component {
 
 
   componentDidMount() {
+
+    window.gm_authFailure = () => {
+      var x = false;
+      alert("There was an error with the Google Maps API")
+      console.log("Hello Beautiful Reviewer");
+      x = true;
+    }
+
+
     SquareAPI.search({
         near: "San Francisco",
         query: "library",
@@ -137,10 +142,8 @@ class App extends Component {
         })
 
       })
-      .catch(error => {
-        this.setState({
-          error
-        });
+      .catch(e => {
+        alert("There was an error with the Foursquare URL")
       })
   }
 
@@ -161,23 +164,27 @@ class App extends Component {
       venueClickHandler = {this.venueClickHandler}
       filterOnQuery = {this.filterOnQuery}
       />;
-
     }
 
+/* if(x) */
     return (
+
       <div style = {{height: '100%'}}>
           <Toolbar drawerClickHandler = {this.drawerToggleClickHandler}/>
           {viewDrawer}
           <main style = {{marginTop: '65px'}}>
           </main>
-          <Map
-            { ...this.state}
-            handleMarkerClick = {this.handleMarkerClick}
-            closeOpenMarkers = {this.closeOpenMarkers}
-            filterOnQuery = {this.filterOnQuery}
-            click = {this.mapClickHandler}
-          />
+
+              <Map
+                { ...this.state}
+                handleMarkerClick = {this.handleMarkerClick}
+                closeOpenMarkers = {this.closeOpenMarkers}
+                filterOnQuery = {this.filterOnQuery}
+                click = {this.mapClickHandler}
+              />
+
       </div>
+
     );
   }
 }
