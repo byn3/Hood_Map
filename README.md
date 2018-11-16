@@ -1,3 +1,30 @@
+# SF Libraries Web App
+
+This is a single page app that was made for the final project for the Front End Nanodegree. I used React, Google Maps API, Foursquare API, components and libraries to show libraries near Twitter in SF. A hamburger menu can be clicked to drop down the nearby markers. Each marker can be selected to show more information. The list of venues can be filtered through the search bar by matching strings.
+
+Regarding the Foursquare API, I limited it to 15 results and a 1 km radius.
+
+# How to run
+
+* Clone this repo, cd into the repo  
+* npm install  
+* npm start  
+Enjoy!
+
+### Thanks to all the guides and walkthroughs!
+Thanks to the live help, student classrooms, forums, and to the project coaches!!! Doug Brown, Forrest, Yahya Elharony were big MVPs.
+
+Also thanks to all these resources. https://www.diigo.com/outliner/fkkuvb/Udacity-Neighborhood-Map-Project-(project-%237)?key=25wgqnwals
+
+#### How to run the Production Mode
+
+* npm run build  
+* Go to the build directory and start a localhost with python  
+* python -m SimpleHTTPServer 8000  
+* Go to http://localhost:800  
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
