@@ -50,7 +50,7 @@ class Map extends Component {
               aria-label="map"
               {...this.props}
               isMarkerShown
-              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exREMOVED MY KEYSo"
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB63EqqFPt7gOYSJLZZQ1Eq1M2151V_2Z8"
               loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div style={{ height: `100%` }} />}
               mapElement={<div style={{ height: `100%` }} />}
