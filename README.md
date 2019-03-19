@@ -2,6 +2,18 @@
 
 This is a single page app that was made for the final project for the Front End Nanodegree. I used React, Google Maps API, Foursquare API, components and libraries to show libraries near Twitter in SF. A hamburger menu can be clicked to drop down the nearby markers. Each marker can be selected to show more information. The list of venues can be filtered through the search bar by matching strings.
 
+# How to run
+
+Enter/ do these commands in the terminal:
+
+* Clone this repo `https://github.com/byn3/hood_map.git`  
+* CD into the repo `cd hood_map`  
+* npm install `npm install`  
+* npm start `npm start`  
+* A browser should be opened automatically. If not then open any browser and go to `http://localhost:3000`  
+
+Enjoy!
+
 ## The front page looks like this
 
 ![This is a map of SF and libraries by Twitter and 9th street.](https://github.com/byn3/hood_map/blob/master/Map1.png)
@@ -16,12 +28,7 @@ This is a single page app that was made for the final project for the Front End 
 
 Regarding the Foursquare API, I limited it to 15 results and a 1 km radius. There is an production mode version that utuilizes a service worker for offline usage. When a location is selected, furthur info about the venue is taken from the Foursquare API.
 
-# How to run
 
-* Clone this repo, cd into the repo  
-* npm install  
-* npm start  
-Enjoy!
 
 ### Thanks to all the guides and walkthroughs!
 Thanks to the live help, student classrooms, forums, and to the project coaches!!! Doug Brown, Forrest, Yahya Elharony were big MVPs.
